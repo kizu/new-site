@@ -1,0 +1,108 @@
+$node_modules_src = '../../../node_modules'
+
+use($node_modules_src + '/stylobuild', {
+  minifier: 'csswring'
+})
+
+$size = {}
+$color = {}
+
+$size['base'] = 18px
+
+$color['text'] = #0D0D0C
+$color['body'] = #F5F4EB
+$color['menu-bg'] = rgba(#000, 0.32)
+$color['menu-text'] = #FFF
+
+.Page
+  padding: 0
+  margin: 0
+  overflow-y: scroll
+
+  -webkit-text-size-adjust: 100%
+  -ms-text-size-adjust: 100%
+
+  text-rendering: optimizelegibility
+  -webkit-font-smoothing: subpixel-antialiased
+
+  cursor: default
+
+  font-family: Helvetica Neue, Arial, sans-serif
+
+  font-size: $size.base
+  color: $color.text
+  background: $color.body
+
+  &-Body
+    padding: 0
+    margin: 0
+
+  &-Header
+    display: flex
+    justify-content: space-between
+
+    min-height: 100vh
+    padding: 2em
+
+    &_dark
+      background: invert($color.body)
+      color: invert($color.text)
+
+  &-Title
+    padding: 0
+    margin: 0
+
+  &-Subtitle
+    font-size: 32px
+    font-weight: 200
+    letter-spacing: 1px
+
+    ^[0]-Header_dark &
+      font-weight: 100
+
+  &-Contacts
+    padding: 0
+
+  &-Contact
+    display: block
+
+    &-Link
+      color: inherit
+      text-decoration: none
+
+.Section
+  min-height: 100vh
+
+  &-Header
+    padding-top: 1em
+    margin: 0
+
+.Menu
+  position: fixed
+  top: 0
+  left: 0
+  right: 0
+  z-index: 1000
+
+  &-Content
+    display: flex
+
+    width: 100%
+    padding: 0
+    margin: 0
+
+    background: $color.menu-bg
+
+  &-Item
+    display: block
+    padding: 0
+    margin: 0
+
+  &-Link
+    display: block
+
+    padding: 0 0.5em
+
+    text-decoration: none
+
+    color: $color.menu-text

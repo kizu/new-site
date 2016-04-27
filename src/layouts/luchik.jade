@@ -1,0 +1,98 @@
+-
+  var menu = {
+    'main': {
+      name: 'Главная'
+    },
+    'about': {
+      name: 'О нас'
+    },
+    'cats': {
+      name: 'Они хотят домой'
+    },
+    'reports': {
+      name: 'Отчёты и результаты'
+    },
+    'help': {
+      name: 'Как нам помочь'
+    },
+    'credits': {
+      name: 'Нам помогают'
+    },
+    'articles': {
+      name: 'Статьи'
+    }
+  }
+
+mixin Section(name)
+  section.Section(class='Section_' + name, id=name)
+    h2.Section-Header= menu[name].name
+    block
+
+doctype html
+html.Page
+
+  head
+    //- All the important meta stuff
+    meta(
+      charset="utf-8")
+    meta(
+      viewport="width=device-width")
+    meta(
+      http-equiv="X-UA-Compatible",
+      content="IE=EmulateIE7,IE=edge")
+
+    //- The title!
+    - pageTitle = document.title
+    - pageTitle = pageTitle && pageTitle.replace(/<(?:.|\n)*?>/gm, '');
+    title= pageTitle ? pageTitle + " — luchik.org" : "luchik.org"
+
+    link(
+      rel="stylesheet",
+      href= "/s/luchik.css")
+
+  body.Page-Body
+    header.Page-Header#main
+      h1.Page-Title
+        | Лучик
+
+      p.Page-Subtitle Пункт временной передержки<br/>для бездомных кошек в Дубне
+
+      ul.Page-Contacts
+        li.Page-Contact
+          a.Page-Contact-Link(href="https://vk.com/luchik_dubna") luchik_dubna
+        li.Page-Contact
+          //- FIXME: proper tel format
+          a.Page-Contact-Link(href="tel:89265556869") 8 (926) 555-68-69
+        li.Page-Contact
+          //- FIXME: proper tel format
+          a.Page-Contact-Link(href="tel:89165335275") 8 (916) 533-52-75
+
+
+
+
+      nav.Menu
+        ul.Menu-Content
+          - for (item in menu)
+            li.Menu-Item
+              a.Menu-Link(href='#' + item)
+                = menu[item].name
+
+    +Section('about')
+      include luchik/about
+
+    +Section('cats')
+      include luchik/cats
+
+    +Section('reports')
+      include luchik/reports
+
+    +Section('help')
+      include luchik/help
+
+    +Section('credits')
+      include luchik/credits
+
+    +Section('articles')
+      include luchik/articles
+
+    != document.content
